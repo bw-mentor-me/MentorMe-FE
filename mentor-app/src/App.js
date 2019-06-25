@@ -8,12 +8,12 @@ import Signup from './components/Signup';
 function App() {
   return (
     <Router>
-    <div className="App">
-        <Link to='/login' >Login</Link>
-        <Route exact path='/' component={App} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
-    </div>
+      <div className="App">
+          <Login />
+          <Route exact path='/' component={App} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
+      </div>
     </Router>
   );
 }
