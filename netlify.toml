@@ -1,0 +1,7 @@
+[build]
+    base="mentor-app"
+    publish="mentor-app/build"
+    [[redirects]]
+        from="/*"
+        to="/index.html"
+        status=200
