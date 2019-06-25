@@ -1,21 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-          <Login />
-          <Route exact path='/' component={App} />
-          <Route path='/login' component={Login} />
-          <Route path='/signup' component={Signup} />
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+
+  componentDidMount() {
+    this.props.history.push('/login')
+  }
+
+  render () {
+    return (
+      
+        <div className="App">
+            <Route  path='/login' render={(props) => <Login {...props} />} />
+            <Route  path='/signup' render={(props) => <Signup {...props} />} />
+        </div>
+    
+    );
+  }
+
 }
 
-export default App;
+export default withRouter(App);

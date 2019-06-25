@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Signup from './Signup';
 
-export default class Login extends Component {
+class Login extends Component {
     state = {
         username: '',
         password: ''
@@ -24,6 +24,15 @@ export default class Login extends Component {
         })
         .then(res => console.log(res))
         .catch(err => console.log(err))
+        this.setState ({
+            username: '',
+            password: ''
+        })
+    }
+
+    signup = e => {
+        e.preventDefault();
+        this.props.history.push('/signup');
     }
 
     handleChanges = e => {
@@ -40,7 +49,7 @@ export default class Login extends Component {
                 
                 <input type='text' name='username' placeholder='username' onChange={this.handleChanges} value={this.state.username} />
                 <input type='password' name='password' placeholder='password' onChange={this.handleChanges} value={this.state.password} />
-                <button>Log in</button><Link to='/signup' >Sign Up</Link>
+                <button>Log in</button><button onClick={this.signup} >Sign Up</button>
                 
                 </form> 
                 
@@ -48,3 +57,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default Login;
