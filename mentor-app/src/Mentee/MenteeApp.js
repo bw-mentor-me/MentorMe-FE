@@ -31,6 +31,20 @@ export class MenteeApp extends Component {
       .catch(err => console.log(err));
   }
 
+  postQuestion = item => {
+    axios
+      .post("http://localhost:3333/smurfs", item)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          data: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -42,7 +56,12 @@ export class MenteeApp extends Component {
           path="/questions"
           render={props => <QuestionPage {...props} data={this.state.data} />}
         />
-        <Route path="/form" render={props => <QuestionForm {...props} />} />
+        <Route
+          path="/form"
+          render={props => (
+            <QuestionForm {...props} postQuestion={this.postQuestion} />
+          )}
+        />
       </div>
     );
   }

@@ -32,7 +32,7 @@ export default function ImgMediaCard(props) {
             {props.question.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.question.height}
+            {props.question.age}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -41,24 +41,9 @@ export default function ImgMediaCard(props) {
           Share
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          Delete
         </Button>
       </CardActions>
     </Card>
   );
 }
-
-// import React, { Component } from "react";
-
-// export class Card extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>{this.props.question.name} </h1>
-//         <h1>{this.props.question.height} </h1>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Card;
