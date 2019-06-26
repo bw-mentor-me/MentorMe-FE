@@ -1,27 +1,44 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import React from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 class App extends React.Component {
-
   componentDidMount() {
-    this.props.history.push('/login')
+    this.props.history.push("/login");
   }
 
-  render () {
+  render() {
     return (
-      
-        <div className="App">
-            <Route  path='/login' render={(props) => <Login {...props} />} />
-            <Route  path='/signup' render={(props) => <Signup {...props} />} />
-            {/* <Route  path='/questions' render={(props) => <MenteeApp {...props} />} /> */}
-        </div>
-    
+      <div className="App">
+        <Route path="/login" render={props => <Login {...props} />} />
+        <Route path="/signup" render={props => <Signup {...props} />} />
+        {/* <Route  path='/questions' render={(props) => <MenteeApp {...props} />} /> */}
+      </div>
     );
   }
-
 }
 
 export default withRouter(App);
+
+// import React, { Component } from "react";
+// import MenteeApp from "./Mentee/MenteeApp";
+// // import MentorApp from "./Mentor/MentorApp";
+
+// export class App extends Component {
+//   render() {
+//     return (
+//       <div>
+//         <MenteeApp />
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;
