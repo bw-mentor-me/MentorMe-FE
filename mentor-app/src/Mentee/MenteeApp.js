@@ -49,15 +49,16 @@ export class MenteeApp extends Component {
     return (
       <div>
         <NavYo>
-          <NavLink to="/questions">View Questions</NavLink>
-          <NavLink to="/form">Ask a Question</NavLink>
+          <NavLink to="/questionsFeed/questionsPage">View Questions</NavLink>
+          <NavLink to="/questionsFeed/formPage">Ask a Question</NavLink>
         </NavYo>
+
         <Route
-          path="/questions"
+          path="/questionsFeed/questionsPage"
           render={props => <QuestionPage {...props} data={this.state.data} />}
         />
         <Route
-          path="/form"
+          path="/questionsFeed/formPage"
           render={props => (
             <QuestionForm {...props} postQuestion={this.postQuestion} />
           )}
