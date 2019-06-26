@@ -23,10 +23,13 @@ class Login extends Component {
         .then(res => {
             console.log(res)
             localStorage.setItem('token', res.data.access_token)
-            // this.props.history.push('/questions')
+            this.props.history.push('/questionsFeed')
         })
 
-        .catch(err => console.log(err))
+        .catch(err => { console.log(err)
+        this.props.history.push('/questionsFeed')}
+
+        )
         this.setState ({
             username: '',
             password: ''
