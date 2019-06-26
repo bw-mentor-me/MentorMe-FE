@@ -47,6 +47,7 @@ export class QuestionForm extends Component {
   };
 
   render() {
+    console.log("red");
     return (
       <div>
         <Form onSubmit={this.addQuestion}>

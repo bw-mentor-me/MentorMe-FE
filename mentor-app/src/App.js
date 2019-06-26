@@ -20,7 +20,10 @@ class App extends React.Component {
       <div className="App">
         <Route path="/login" render={props => <Login {...props} />} />
         <Route path="/signup" render={props => <Signup {...props} />} />
-        <Route  path='/questionsFeed' render={(props) => <MenteeApp {...props} />} />
+        <Route
+          path="/questionsFeed"
+          render={props => <MenteeApp {...props} />}
+        />
       </div>
     );
   }
