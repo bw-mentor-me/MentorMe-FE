@@ -24,7 +24,7 @@ class Signup extends Component {
     signup = e => {
         e.preventDefault();
         axios
-            .post('http://localhost:8443/oauth/token', this.state.newUser)
+            .post('http://doc-starthere.herokuapp.com/createnewuser', this.state.newUser)
             .then(res => {
                 console.log(res);
                 return this.props.history.push('/login');
@@ -44,17 +44,17 @@ class Signup extends Component {
         })
     }    
     
-    student = e => {
+    entrepreneur = e => {
         e.preventDefault();
         this.setState({
-            userRole: 'mentee'
+            userRole: 'entrepreneur'
         })
     }
 
     render() {
         return (
             <div>
-                <button onClick={this.mentor}>Mentor</button><button onClick={this.student}>Student</button>
+                <button onClick={this.mentor}>Mentor</button><button onClick={this.entrepreneur}>entrepreneur</button>
 
                 <form onSubmit={this.signup}>
                     <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChanges} />

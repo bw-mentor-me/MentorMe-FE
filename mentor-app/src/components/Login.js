@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Signup from './Signup';
 
 class Login extends Component {
     state = {
@@ -12,7 +10,7 @@ class Login extends Component {
     login = e => {
 
         e.preventDefault();
-        axios.post('http://localhost:8443/oauth/token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`, {
+        axios.post('http://doc-starthere.herokuapp.com/oauth/token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`, {
 
       headers: {
 
@@ -22,7 +20,12 @@ class Login extends Component {
 
         }
         })
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res)
+            localStorage.setItem('token', res.data.access_token)
+            // this.props.history.push('/questions')
+        })
+
         .catch(err => console.log(err))
         this.setState ({
             username: '',
