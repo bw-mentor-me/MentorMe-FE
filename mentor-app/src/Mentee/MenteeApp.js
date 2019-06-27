@@ -23,7 +23,7 @@ export class MenteeApp extends Component {
 
   componentDidMount() {
     axios
-      .get("http://doc-starthere.herokuapp.com/questions/questions")
+      .get("http://http://doc-mentorme.herokuapp.com/questions/questions")
       .then(res => {
         console.log(res);
         this.setState({ data: res.data });
@@ -33,7 +33,7 @@ export class MenteeApp extends Component {
 
   postQuestion = item => {
     axios
-      .post("http://doc-starthere.herokuapp.com/questions/question", item)
+      .post("http://doc-mentorme.herokuapp.com/questions/question", item)
       .then(res => {
         console.log(res);
         this.setState({

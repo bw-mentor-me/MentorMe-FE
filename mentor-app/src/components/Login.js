@@ -10,7 +10,7 @@ class Login extends Component {
     login = e => {
 
         e.preventDefault();
-        axios.post('http://doc-starthere.herokuapp.com/oauth/token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`, {
+        axios.post('http://doc-mentorme.herokuapp.com/oauth/token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`, {
 
       headers: {
 
@@ -23,6 +23,10 @@ class Login extends Component {
         .then(res => {
             console.log(res)
             localStorage.setItem('token', res.data.access_token)
+            axios  
+                .get('http://doc-mentorme.herokuapp.com/users/user')
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
             this.props.history.push('/questionsFeed')
         })
 

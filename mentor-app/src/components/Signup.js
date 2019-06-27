@@ -6,9 +6,9 @@ class Signup extends Component {
         newUser: {
             username: '',
             password: '',
-            phoneNumber: '',
-            industryType: '',
-            userRole: ''
+            phonenumber: '',
+            industrytype: '',
+            usertype: 'entrepreneur'
         }
     }
 
@@ -23,8 +23,9 @@ class Signup extends Component {
 
     signup = e => {
         e.preventDefault();
+        console.log(this.state.newUser);
         axios
-            .post('http://doc-starthere.herokuapp.com/createnewuser', this.state.newUser)
+            .post('http://doc-mentorme.herokuapp.com/users/user', this.state.newUser)
             .then(res => {
                 console.log(res);
                 return this.props.history.push('/login');
@@ -40,15 +41,26 @@ class Signup extends Component {
     mentor = e => {
         e.preventDefault();
         this.setState({
-            userRole: 'mentor'
+            newUser: {
+                ...this.state.newUser,
+                usertype: 'mentor'
+
+            }
         })
+        console.log(this.state)
     }    
     
     entrepreneur = e => {
         e.preventDefault();
         this.setState({
-            userRole: 'entrepreneur'
+            newUser: {
+                ...this.state.newUser,
+                usertype: 'entrepreneur'
+
+            }
         })
+        console.log(this.state)
+
     }
 
     render() {
@@ -57,10 +69,10 @@ class Signup extends Component {
                 <button onClick={this.mentor}>Mentor</button><button onClick={this.entrepreneur}>entrepreneur</button>
 
                 <form onSubmit={this.signup}>
-                    <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChanges} />
-                    <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChanges} />
-                    <input type='text' name='phoneNumber' placeholder='Cell Phone Number' value={this.state.phoneNumber} onChange={this.handleChanges} />
-                    <input type='text' name='industryType' placeholder='Industry' value={this.state.industryType} onChange={this.handleChanges} />        
+                    <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChanges} required />
+                    <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChanges} required  />
+                    <input type='text' name='phonenumber' placeholder='Cell Phone Number' value={this.state.phoneNumber} onChange={this.handleChanges} required  />
+                    <input type='text' name='industrytype' placeholder='Industry' value={this.state.industryType} onChange={this.handleChanges} required  />        
                     <button type='submit'>sign up</button>
                 </form>
             </div>
