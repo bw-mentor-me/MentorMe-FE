@@ -23,7 +23,11 @@ export class MenteeApp extends Component {
 
   componentDidMount() {
     axios
+<<<<<<< HEAD
       .get("http://http://doc-mentorme.herokuapp.com/questions/questions")
+=======
+      .get("http://doc-mentorme.herokuapp.com/questions/questions")
+>>>>>>> 958337b9e9bc10affc052276997233c489549470
       .then(res => {
         console.log(res);
         this.setState({ data: res.data });

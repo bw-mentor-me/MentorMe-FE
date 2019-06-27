@@ -1,85 +1,71 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { Component } from "react";
+import { Route, NavLink } from "react-router-dom";
+import QuestionPage from "./components/QuestionPage";
+import QuestionForm from "./components/QuestionForm";
+import axios from "axios";
+import styled from "styled-components";
 
-class Signup extends Component {
-    state = {
-        newUser: {
-            username: '',
-            password: '',
-            phonenumber: '',
-            industrytype: '',
-            usertype: 'entrepreneur'
-        }
-    }
+const NavYo = styled.nav`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+`;
 
-    handleChanges = e => {
+export class MenteeApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://doc-mentorme.herokuapp.com/questions/questions")
+      .then(res => {
+        console.log(res);
+        this.setState({ data: res.data });
+      })
+      .catch(err => console.log(err));
+  }
+
+  postQuestion = item => {
+    axios
+      .post("http://doc-mentorme.herokuapp.com/questions/question", item)
+      .then(res => {
+        console.log(res);
         this.setState({
-            newUser : {
-                ...this.state.newUser,
-                [e.target.name]: e.target.value
-            }
-        })
-    }
+          data: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-    signup = e => {
-        e.preventDefault();
-        console.log(this.state.newUser);
-        axios
-            .post('http://doc-mentorme.herokuapp.com/users/user', this.state.newUser)
-            .then(res => {
-                console.log(res);
-                return this.props.history.push('/login');
-            })
-            .catch(err => {
-                console.log(err);
-                return this.props.history.push('/login');
+  render() {
+    return (
+      <div>
+        <NavYo>
+          <NavLink to="/questionsFeed/questionsPage">View Questions</NavLink>
+          <NavLink to="/questionsFeed/formPage">Ask a Question</NavLink>
+        </NavYo>
 
-            })
-            
-    }   
-
-    mentor = e => {
-        e.preventDefault();
-        this.setState({
-            newUser: {
-                ...this.state.newUser,
-                usertype: 'mentor'
-
-            }
-        })
-        console.log(this.state)
-    }    
-    
-    entrepreneur = e => {
-        e.preventDefault();
-        this.setState({
-            newUser: {
-                ...this.state.newUser,
-                usertype: 'entrepreneur'
-
-            }
-        })
-        console.log(this.state)
-
-    }
-
-    render() {
-        return (
-            <div>
-                <button onClick={this.mentor}>Mentor</button><button onClick={this.entrepreneur}>entrepreneur</button>
-
-                <form onSubmit={this.signup}>
-                    <input type='text' name='username' placeholder='username' value={this.state.username} onChange={this.handleChanges} required />
-                    <input type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleChanges} required  />
-                    <input type='text' name='phonenumber' placeholder='Cell Phone Number' value={this.state.phoneNumber} onChange={this.handleChanges} required  />
-                    <input type='text' name='industrytype' placeholder='Industry' value={this.state.industryType} onChange={this.handleChanges} required  />        
-                    <button type='submit'>sign up</button>
-                </form>
-            </div>
-        )
-    }
+        <Route
+          path="/questionsFeed/questionsPage"
+          render={props => <QuestionPage {...props} data={this.state.data} />}
+        />
+        <Route
+          path="/questionsFeed/formPage"
+          render={props => (
+            <QuestionForm {...props} postQuestion={this.postQuestion} />
+          )}
+        />
+      </div>
+    );
+  }
 }
 
-
-export default Signup;
-
+export default MenteeApp;

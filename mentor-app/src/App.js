@@ -1,11 +1,6 @@
 import React from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  withRouter
-} from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import MenteeApp from "./Mentee/MenteeApp";

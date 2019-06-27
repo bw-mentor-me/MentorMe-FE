@@ -9,11 +9,11 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Industry = styled.input`
-  margin-bottom: 20px;
-  margin-top: 20px;
-  padding-right: 40px;
-`;
+// const Industry = styled.input`
+//   margin-bottom: 20px;
+//   margin-top: 20px;
+//   padding-right: 40px;
+// `;
 const QuestionText = styled.input`
   margin-bottom: 10px;
   padding-bottom: 50px;
@@ -24,19 +24,16 @@ export class QuestionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      age: "",
-      height: 1
+      question: "",
+      user: {}
     };
   }
 
   addQuestion = e => {
     e.preventDefault();
-    console.log("red");
     this.props.postQuestion(this.state);
     this.setState({
-      name: "",
-      age: ""
+      question: ""
     });
   };
 
@@ -51,18 +48,18 @@ export class QuestionForm extends Component {
     return (
       <div>
         <Form onSubmit={this.addQuestion}>
-          <Industry
+          {/* <Industry
             placeholder="Industry"
             type="text"
             value={this.state.name}
             name="name"
             onChange={this.handleChange}
-          />
+          /> */}
           <QuestionText
             placeholder="Question: "
             type="text"
-            value={this.state.age}
-            name="age"
+            value={this.state.question}
+            name="question"
             onChange={this.handleChange}
           />
 
