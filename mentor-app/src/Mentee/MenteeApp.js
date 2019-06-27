@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 import QuestionPage from "./components/QuestionPage";
 import QuestionForm from "./components/QuestionForm";
 import axios from "axios";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 
 const NavYo = styled.nav`
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid red;
   display: flex;
   justify-content: space-around;
+  background: #cccccc;
 `;
 
 export class MenteeApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      activeQuestion: null
     };
   }
 
@@ -25,15 +27,19 @@ export class MenteeApp extends Component {
     axios
       .get("http://doc-mentorme.herokuapp.com/questions/questions")
       .then(res => {
-        console.log(res);
         this.setState({ data: res.data });
+        console.log(res);
       })
       .catch(err => console.log(err));
   }
 
   postQuestion = item => {
     axios
-      .post("http://doc-mentorme.herokuapp.com/questions/question", item)
+      .post("http://doc-mentorme.herokuapp.com/questions/question", item, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
       .then(res => {
         console.log(res);
         this.setState({
@@ -45,17 +51,79 @@ export class MenteeApp extends Component {
       });
   };
 
+  deleteQuestion = id => {
+    axios
+      .delete(`http://doc-mentorme.herokuapp.com/questions/question/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+
+      .then(res => {
+        console.log(res);
+        this.setState({ data: res.data });
+        this.props.history.push("/questionsFeed/questionsPage");
+      })
+      .catch(err => console.log(err));
+  };
+
+  updateQuestion = (id, updatedInfo) => {
+    axios
+      .put(
+        `http://doc-mentorme.herokuapp.com/questions/question/${id}`,
+        updatedInfo,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
+      )
+      .then(res => {
+        this.setState({ data: res.data });
+        console.log(res);
+        this.props.history.push("/questionsFeed/questionsPage");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  setUpdateQuestion = question => {
+    this.setState({
+      activeQuestion: question
+    });
+  };
+
+  buttonFunction = e => {
+    e.preventDefault();
+    this.props.history.push("/questionsFeed/questionsPage");
+  };
+
+  buttonFunction2 = e => {
+    e.preventDefault();
+    this.props.history.push("/questionsFeed/formPage");
+  };
+
   render() {
     return (
       <div>
         <NavYo>
-          <NavLink to="/questionsFeed/questionsPage">View Questions</NavLink>
-          <NavLink to="/questionsFeed/formPage">Ask a Question</NavLink>
+          <Button onClick={this.buttonFunction}>View Questions</Button>
+          <Button onClick={this.buttonFunction2}>Ask Question</Button>
         </NavYo>
 
         <Route
           path="/questionsFeed/questionsPage"
-          render={props => <QuestionPage {...props} data={this.state.data} />}
+          render={props => (
+            <QuestionPage
+              {...props}
+              data={this.state.data}
+              deleteQuestion={this.deleteQuestion}
+              updateQuestion={this.updateQuestion}
+              setUpdateQuestion={this.setUpdateQuestion}
+              activeQuestion={this.state.activeQuestion}
+            />
+          )}
         />
         <Route
           path="/questionsFeed/formPage"
