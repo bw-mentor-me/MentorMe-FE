@@ -17,6 +17,7 @@ const Form = styled.form`
 const QuestionText = styled.input`
   margin-bottom: 10px;
   padding-bottom: 50px;
+  margin-top: 20px;
   padding-right: 40px;
 `;
 
@@ -25,12 +26,13 @@ export class QuestionForm extends Component {
     super(props);
     this.state = {
       question: "",
-      user: {}
+      userid: localStorage.getItem("userid")
     };
   }
 
   addQuestion = e => {
     e.preventDefault();
+    console.log(this.state);
     this.props.postQuestion(this.state);
     this.setState({
       question: ""
@@ -44,7 +46,6 @@ export class QuestionForm extends Component {
   };
 
   render() {
-    console.log("red");
     return (
       <div>
         <Form onSubmit={this.addQuestion}>
