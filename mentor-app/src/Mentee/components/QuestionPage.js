@@ -10,7 +10,7 @@ export class QuestionPage extends Component {
 
   searchFilter = e => {
     const filtered = this.state.data.filter(post =>
-      post.name.toLowerCase().includes(e.target.value.toLowerCase())
+      post.question.toLowerCase().includes(e.target.value.toLowerCase())
     );
     this.setState({ filteredPosts: filtered });
   };
