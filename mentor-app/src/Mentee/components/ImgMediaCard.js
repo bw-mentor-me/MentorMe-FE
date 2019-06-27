@@ -6,12 +6,19 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import styled from "styled-components";
 
 const useStyles = makeStyles({
   card: {
     maxWidth: 345
   }
 });
+
+const CommentInput = styled.input`
+  border: 1px solid gray;
+  max-width: 345px;
+  padding: 10px 1px;
+`;
 
 export default function ImgMediaCard(props) {
   const classes = useStyles();
@@ -26,6 +33,7 @@ export default function ImgMediaCard(props) {
           image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         /> */}
+
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.question.user.username}
@@ -34,18 +42,20 @@ export default function ImgMediaCard(props) {
             {props.question.question}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.question.user.industryType}
+            {props.question.user.industrytype}
           </Typography>
+          <Button size="small" color="primary">
+            Delete
+          </Button>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Comment
-        </Button>
-        <Button size="small" color="primary">
-          Delete
-        </Button>
-      </CardActions>
+
+      {/* <Button size="small" color="primary">
+          Add Comment
+        </Button> */}
+      <form>
+        <CommentInput type="text" placeholder="Add a comment..." />
+      </form>
     </Card>
   );
 }
