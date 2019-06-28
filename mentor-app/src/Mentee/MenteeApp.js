@@ -84,6 +84,7 @@ export class MenteeApp extends Component {
   };
 
   updateQuestion = (id, updatedInfo) => {
+    console.log("redsssssssss");
     axios
       .put(
         `https://doc-mentorme.herokuapp.com/questions/question/${id}`,

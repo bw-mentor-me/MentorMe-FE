@@ -30,6 +30,7 @@ export class QuestionPage extends Component {
         />
         <UpdateForm
           setUpdateQuestion={this.props.setUpdateQuestion}
+          updateQuestion={this.props.updateQuestion}
           activeQuestion={this.props.activeQuestion}
         />
       </div>
