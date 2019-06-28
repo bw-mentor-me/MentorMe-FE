@@ -25,17 +25,22 @@ export class MenteeApp extends Component {
 
   componentDidMount() {
     axios
-      .get("http://doc-mentorme.herokuapp.com/questions/questions")
+      .get("https://doc-mentorme.herokuapp.com/questions/questions", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
       .then(res => {
         this.setState({ data: res.data });
         console.log(res);
+        this.props.history.push("/questionsFeed/questionsPage");
       })
       .catch(err => console.log(err));
   }
 
   postQuestion = item => {
     axios
-      .post("http://doc-mentorme.herokuapp.com/questions/question", item, {
+      .post("https://doc-mentorme.herokuapp.com/questions/question", item, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -53,7 +58,7 @@ export class MenteeApp extends Component {
 
   deleteQuestion = id => {
     axios
-      .delete(`http://doc-mentorme.herokuapp.com/questions/question/${id}`, {
+      .delete(`https://doc-mentorme.herokuapp.com/questions/question/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -70,7 +75,7 @@ export class MenteeApp extends Component {
   updateQuestion = (id, updatedInfo) => {
     axios
       .put(
-        `http://doc-mentorme.herokuapp.com/questions/question/${id}`,
+        `https://doc-mentorme.herokuapp.com/questions/question/${id}`,
         updatedInfo,
         {
           headers: {
