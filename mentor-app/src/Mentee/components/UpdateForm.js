@@ -32,6 +32,7 @@ export class UpdateForm extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Form>
@@ -47,7 +48,7 @@ export class UpdateForm extends Component {
             onClick={() =>
               this.props.updateQuestion(
                 this.props.activeQuestion.questionsid,
-                this.state
+                this.state.question
               )
             }
             size="small"

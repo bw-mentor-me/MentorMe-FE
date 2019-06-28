@@ -26,6 +26,7 @@ export class CardContainer extends Component {
   // }
 
   render() {
+    console.log(this.props.data);
     return (
       <div>
         {this.props.filteredPosts.length === 0

@@ -5,12 +5,11 @@ import UpdateForm from "./UpdateForm";
 
 export class QuestionPage extends Component {
   state = {
-    data: this.props.data,
     filteredPosts: []
   };
 
   searchFilter = e => {
-    const filtered = this.state.data.filter(post =>
+    const filtered = this.props.data.filter(post =>
       post.question.toLowerCase().includes(e.target.value.toLowerCase())
     );
     this.setState({ filteredPosts: filtered });
@@ -21,7 +20,7 @@ export class QuestionPage extends Component {
       <div>
         <SearchBar searchFilter={this.searchFilter} />
         <CardContainer
-          data={this.state.data}
+          data={this.props.data}
           searchFilter={this.searchFilter}
           filteredPosts={this.state.filteredPosts}
           deleteQuestion={this.props.deleteQuestion}
@@ -31,6 +30,7 @@ export class QuestionPage extends Component {
         />
         <UpdateForm
           setUpdateQuestion={this.props.setUpdateQuestion}
+          updateQuestion={this.props.updateQuestion}
           activeQuestion={this.props.activeQuestion}
         />
       </div>
