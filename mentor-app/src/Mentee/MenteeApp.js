@@ -46,10 +46,21 @@ export class MenteeApp extends Component {
         }
       })
       .then(res => {
-        console.log(res);
-        this.setState({
-          data: res.data
-        });
+        axios
+          .get("https://doc-mentorme.herokuapp.com/questions/questions", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          })
+          .then(res => {
+            this.setState({ data: res.data });
+            console.log(res);
+            this.props.history.push("/questionsFeed/questionsPage");
+          })
+          .catch(err => console.log(err));
+        // this.setState({
+        //   data: res.data
+        // });
       })
       .catch(err => {
         console.log(err);
