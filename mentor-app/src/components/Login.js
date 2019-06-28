@@ -30,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
     axios
       .post(
-        "http://doc-mentorme.herokuapp.com/oauth/token",
+        "https://doc-mentorme.herokuapp.com/oauth/token",
         `grant_type=password&username=${this.state.username}&password=${
           this.state.password
         }`,
@@ -46,7 +46,7 @@ class Login extends Component {
         console.log(res);
         localStorage.setItem("token", res.data.access_token);
         axios
-          .get("http://doc-mentorme.herokuapp.com/users/getusername", {
+          .get("https://doc-mentorme.herokuapp.com/users/getusername", {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`
             }

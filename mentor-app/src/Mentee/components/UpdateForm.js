@@ -26,6 +26,11 @@ export class UpdateForm extends Component {
     question: ""
   };
 
+  handleChange = e => {
+    e.persist();
+    this.setState({ question: e.target.value });
+  };
+
   render() {
     return (
       <div>

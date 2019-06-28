@@ -21,7 +21,7 @@ export class QuestionPage extends Component {
       <div>
         <SearchBar searchFilter={this.searchFilter} />
         <CardContainer
-          data={this.props.data}
+          data={this.state.data}
           searchFilter={this.searchFilter}
           filteredPosts={this.state.filteredPosts}
           deleteQuestion={this.props.deleteQuestion}
